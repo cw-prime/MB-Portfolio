@@ -1,0 +1,190 @@
+/* Reset some default styles */
+body, ul, li, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Base Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #ccc;
+    backdrop-filter: blur(8px); /* Adjust the blur value as needed */
+
+}
+
+/* Logo Styles */
+.logo {
+    width: 80px; /* Adjust the width as needed */
+    height: auto; /* Maintain the aspect ratio */
+}
+
+/* Navigation Links Styles */
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: center; /* Center the nav links horizontally */
+    align-items: center;
+}
+.nav-links li {
+    margin: 0 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+/* Menu Button Styles */
+.menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 30px;
+}
+
+.menu-button .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* Overlay Menu Styles */
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    width: 100vw; /* Ensure full width of the viewport */
+    height: 100vh; /* Ensure full height of the viewport */
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    z-index: 1002;
+}
+
+.overlay-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 9999; /* Adjust z-index as needed */
+    list-style: none; /* Hide list-style dots */
+    text-align: center;
+
+
+}
+
+.overlay-menu ul {
+    text-align: center;
+}
+
+.overlay-menu li {
+    margin: 20px 0;
+}
+
+.overlay-menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+    display: block;
+    padding: 10px;
+}
+
+.overlay-menu a:hover {
+    color: lightblue;
+}
+
+/* Responsive Styles */
+
+/* Small Devices (Phones) */
+@media screen and (max-width: 576px) {
+    .nav-links {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .overlay {
+        display: block;
+    }
+    .overlay-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        z-index: 9999;
+
+    }
+}
+
+/* Large Devices (Laptops, Desktops) */
+@media screen and (min-width: 577px) {
+    .menu-button {
+        display: none;
+    }
+
+    .overlay {
+        display: none;
+    }
+}
+
+/* Medium Devices (Laptops, Desktops) */
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    .navbar {
+        justify-content: center;
+    }
+
+    .nav-links {
+        /* Centering styles for medium devices */
+        justify-content: center;
+    }
+}
+
+/* Large Devices (Large Desktops) */
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+    .navbar {
+        /* Centering styles for large devices */
+        justify-content: center;
+    }
+
+    .nav-links {
+        /* Centering styles for large devices */
+        flex-grow: 1;
+        justify-content: center;
+    }
+}
+
+/* Extra Large Devices (1201px to 2400px) */
+@media screen and (min-width: 1201px) and (max-width: 2400px) {
+    .navbar {
+        /* Centering styles for extra-large devices */
+        justify-content: center;
+    }
+
+    .nav-links {
+        /* Centering styles for extra-large devices */
+        flex-grow: 1;
+        justify-content: center;
+    }
+}

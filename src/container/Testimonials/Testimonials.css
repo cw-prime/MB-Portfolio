@@ -1,0 +1,137 @@
+/* Base styles for the testimonial section */
+/* Adjusted styles for the testimonial section */
+.app__testimonial-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0; /* Reduced padding for less white space */
+    justify-content: center;
+  }
+
+  .app__testimonial-item {
+    display: flex;
+    flex-direction: row; /* Aligns children (image and text) in a row */
+    justify-content: start; /* Aligns children to the start of the container */
+    align-items: center; /* Vertically centers the children */
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+/* Ensure the image has a fixed size and adjust as necessary */
+.app__testimonial-item img {
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    margin-right: 20px; /* Adds some space between the image and the text */
+  }
+  /* Continue with other styles unchanged */
+
+
+  .app__testimonial-content {
+    flex: 1;
+    padding: 0 2rem; /* Adjust the padding as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the content vertically */
+  }
+
+  /* Adjusting styles for chevrons and brands */
+  .app__testimonial-btns, .app__testimonial-brands {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem; /* Added margin-top for spacing */
+  }
+
+  .app__testimonial-btns div, .app__testimonial-brands div {
+    margin: 1rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Styles for images and buttons */
+  img {
+    width: 100px;/* Ensure the image has a fixed size and adjust as necessary */
+    .app__testimonial-item img {
+      width: 100px; /* Adjust the width as needed */
+      height: 100px; /* Adjust the height as needed */
+      border-radius: 50%; /* Makes the image circular */
+      object-fit: cover; /* Ensures the image covers the area without distortion */
+      margin-right: 20px; /* Adds some space between the image and the text */
+    }
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .app__testimonial-btns div {
+    background-color: var(--white-color); /* Ensure this variable is defined */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  /* Hover effect for chevrons */
+  .app__testimonial-btns div:hover {
+    background-color: #b8b2b2; /* Updated for hover effect */
+  }
+
+  /* Brand images */
+  .app__testimonial-brands div {
+    width: 150px;
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      filter: grayscale(1);
+    }
+  }
+
+  .app__testimonial-brands div img:hover {
+    filter: grayscale(0);
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 850px) {
+    .app__testimonial-item {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .app__testimonial-container, .app__testimonial-item, .app__testimonial-content {
+      padding: 2rem 1rem; /* Added padding for smaller screens */
+    }
+
+    .app__testimonial-item img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1rem;
+    }
+
+    .app__testimonial-brands div {
+      width: 100px; /* Adjust for smaller screens */
+      margin: 0.5rem;
+    }
+  }
+/* Responsive adjustments to stack the image above the text on smaller screens */
+@media screen and (max-width: 600px) {
+    .app__testimonial-item {
+      flex-direction: column; /* Stacks the image and text vertically on small screens */
+      align-items: center; /* Centers the items */
+    }
+
+    .app__testimonial-item img {
+      margin-right: 0; /* Removes the right margin on smaller screens */
+      margin-bottom: 20px; /* Adds space below the image */
+    }
+  }

@@ -1,0 +1,18 @@
+/* global.css */
+
+body {
+    margin: 0 40px;
+    padding: 0;
+    font-family: 'Arial', sans-serif; /* Change the font-family as needed */
+    background-color: #f5f5f5; /* Set the background color */
+    color: #333; /* Set the text color */
+
+
+
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }

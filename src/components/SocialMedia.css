@@ -1,0 +1,25 @@
+.social-icons {
+    position: fixed;
+    top: 20%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1099; /* Add a higher z-index value */
+  }
+
+  .icon {
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+  .icon a {
+    color: #333;
+    font-size: 30px;
+    transition: color 0.3s ease;
+  }
+
+  .icon a:hover {
+    color: #ff3366;
+  }
