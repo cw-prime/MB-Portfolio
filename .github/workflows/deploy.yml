@@ -23,10 +23,22 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }} # Assuming you've added your SSH key as a secret
+          key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /var/www/MB-Portfolio # Replace with your deploy directory
-            rm -rf * # Clear existing files (caution!)
-            cp -r $GITHUB_WORKSPACE/build/* . # Copy built files from build directory
-            sudo systemctl restart nginx # Restart Nginx
+            # Ensure the deploy user has ownership of the deployment directory
+            sudo chown -R $USER:$USER /var/www/MB-Portfolio
+            sudo chmod -R 755 /var/www/MB-Portfolio
+
+            # Safely clear existing files, preserving node_modules
+            find /var/www/MB-Portfolio -mindepth 1 ! -name 'node_modules' -exec rm -rf {} +
+
+            # Copy built files from build directory
+            cp -r $GITHUB_WORKSPACE/build/* /var/www/MB-Portfolio
+
+            # Optionally, if node_modules need to be refreshed or specifically handled
+            # cd /var/www/MB-Portfolio
+            # npm install --production
+
+            # Restart Nginx to apply changes
+            sudo systemctl restart nginx
