@@ -29,10 +29,10 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            # Check if the repository directory exists and clone or pull as necessary
+            # Check if the repository directory exists
             if [ -d /var/www/MB-Portfolio/.git ]; then
-              echo "Repository exists, pulling changes..."
-              cd /var/www/MB-Portfolio && git pull
+              echo "Repository exists, updating..."
+              cd /var/www/MB-Portfolio && git fetch --all && git reset --hard origin/master
             else
               echo "Repository does not exist, cloning..."
               git clone https://github.com/cw-prime/MB-Portfolio.git /var/www/MB-Portfolio
