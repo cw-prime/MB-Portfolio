@@ -30,7 +30,7 @@ const About = (props) => { // Correctly receive props as an object
       <div className="about-container">
         <motion.div className="slogan-container">
           <h1 className="slogan">
-            <span className="slogan-primary">Innovation Unleashed, This lets</span>
+            <span className="slogan-primary">Innovation Unleashed, This lets this</span>
             <span className="slogan-secondary"> Designing Tomorrow.</span>
           </h1>
         </motion.div>
