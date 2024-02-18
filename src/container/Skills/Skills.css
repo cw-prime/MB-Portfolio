@@ -56,7 +56,7 @@
   }
 
   .app__skills-item div:hover {
-    box-shadow: 0 0 25px #fef4f5;
+    box-shadow: 0 0 25px #f5eff0;
   }
 
   @media screen and (min-width: 2000px) {
