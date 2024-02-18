@@ -18,7 +18,6 @@ jobs:
       - name: Build React App
         run: npm run build
 
-      # Add a debugging step here
       - name: Debugging build directory contents
         run: ls -la $GITHUB_WORKSPACE/build
 
@@ -30,6 +29,15 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            # Check if the repository directory exists and clone or pull as necessary
+            if [ -d /var/www/MB-Portfolio/.git ]; then
+              echo "Repository exists, pulling changes..."
+              cd /var/www/MB-Portfolio && git pull
+            else
+              echo "Repository does not exist, cloning..."
+              git clone https://github.com/cw-prime/MB-Portfolio.git /var/www/MB-Portfolio
+            fi
+
             # Ensure the deploy user has ownership of the deployment directory
             sudo chown -R $USER:$USER /var/www/MB-Portfolio
             sudo chmod -R 755 /var/www/MB-Portfolio
@@ -39,10 +47,6 @@ jobs:
 
             # Copy built files from build directory
             cp -r $GITHUB_WORKSPACE/build/* /var/www/MB-Portfolio
-
-            # Optionally, if node_modules need to be refreshed or specifically handled
-            # cd /var/www/MB-Portfolio
-            # npm install --production
 
             # Restart Nginx to apply changes
             sudo systemctl restart nginx
