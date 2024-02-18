@@ -19,7 +19,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to Server (Using SSH keys, recommended)
-        uses: s0phtware/ssh-action@v2
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -28,17 +28,5 @@ jobs:
           script: |
             cd /var/www/MB-Portfolio # Replace with your deploy directory
             rm -rf * # Clear existing files (caution!)
-            cp -r ../build/* . # Copy built files from build directory
+            cp -r $GITHUB_WORKSPACE/build/* . # Copy built files from build directory
             sudo systemctl restart nginx # Restart Nginx
-
-      - name: Deploy to Server (Using password, fallback option)
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          source: "build/"
-          target: "/var/www/MB-Portfolio"
-
-
