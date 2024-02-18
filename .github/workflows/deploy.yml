@@ -1,0 +1,45 @@
+name: Deploy React App
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Deploy to Server (Using SSH keys, recommended)
+        uses: s0phtware/ssh-action@v2
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }} # Assuming you've added your SSH key as a secret
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/MB-Portfolio # Replace with your deploy directory
+            rm -rf * # Clear existing files (caution!)
+            cp -r ../build/* . # Copy built files from build directory
+            sudo systemctl restart nginx # Restart Nginx
+
+      - name: Deploy to Server (Using password, fallback option)
+        uses: appleboy/scp-action@master
+        if: ${{ failure() && secrets.SERVER_SSH_KEY == '' }} # Only run if previous step fails and no SSH key provided
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "build/"
+          target: "/var/www/MB-Portfolio"
+
+
