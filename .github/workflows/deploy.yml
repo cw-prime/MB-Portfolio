@@ -24,6 +24,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }} # Assuming you've added your SSH key as a secret
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.PORT }}
           script: |
             cd /var/www/MB-Portfolio # Replace with your deploy directory
