@@ -33,13 +33,20 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            # Check if the repository directory exists
-            if [ -d /var/www/MB-Portfolio/.git ]; then
+            # Navigate to the web root directory
+            cd /var/www
+
+            # Check if the MB-Portfolio directory exists and has a .git directory
+            if [ -d "MB-Portfolio/.git" ]; then
               echo "Repository exists, updating..."
-              cd /var/www/MB-Portfolio && git fetch --all && git reset --hard origin/master
+              cd MB-Portfolio && git fetch --all && git reset --hard origin/master
+            elif [ -d "MB-Portfolio" ]; then
+              echo "Directory exists but is not a Git repository. Removing and cloning..."
+              sudo rm -rf MB-Portfolio
+              git clone https://github.com/cw-prime/MB-Portfolio.git
             else
-              echo "Repository does not exist, cloning..."
-              git clone https://github.com/cw-prime/MB-Portfolio.git /var/www/MB-Portfolio
+              echo "Directory does not exist, cloning..."
+              git clone https://github.com/cw-prime/MB-Portfolio.git
             fi
 
             # Ensure the web server user (www-data) and webadmins group have the appropriate ownership and permissions
