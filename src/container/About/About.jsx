@@ -32,6 +32,7 @@ const About = (props) => { // Correctly receive props as an object
           <h1 className="slogan">
             <span className="slogan-primary">Innovation Unleashed, This lets this</span>
             <span className="slogan-secondary"> Designing Here Tomorrows here.</span>
+            <span className="slogan-secondary"> And Cyber Security Expert</span>
 
           </h1>
         </motion.div>
