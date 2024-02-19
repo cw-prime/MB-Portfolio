@@ -42,9 +42,9 @@ jobs:
               git clone https://github.com/cw-prime/MB-Portfolio.git /var/www/MB-Portfolio
             fi
 
-            ## Ensure the web server user (www-data) has ownership of the deployment directory
-            sudo chown -R alan:alan /var/www/MB-Portfolio
-            sudo chmod -R 755 /var/www/MB-Portfolio
+            # Ensure the web server user (www-data) and webadmins group have the appropriate ownership and permissions
+            sudo chown -R alan:webadmins /var/www/MB-Portfolio
+            sudo chmod -R 775 /var/www/MB-Portfolio
 
             # Safely clear existing files, preserving node_modules
             find /var/www/MB-Portfolio -mindepth 1 ! -name 'node_modules' -exec rm -rf {} +
