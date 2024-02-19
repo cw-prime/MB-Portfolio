@@ -1,4 +1,4 @@
-name: Deploy React App
+name: Deploy React App to Production
 
 on:
   push:
@@ -9,55 +9,26 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build React App
+      - name: Build React app
         run: npm run build
 
-      - name: Check executing user
-        run: whoami
-
-
-      - name: Debugging build directory contents
-        run: ls -la $GITHUB_WORKSPACE/build
-
-      - name: Deploy to Server (Using SSH keys, recommended)
+      - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          username: 'alan'
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            # Navigate to the web root directory
-            cd /var/www
-
-            # Check if the MB-Portfolio directory exists and has a .git directory
-            if [ -d "MB-Portfolio/.git" ]; then
-              echo "Repository exists, updating..."
-              cd MB-Portfolio && git fetch --all && git reset --hard origin/master
-            elif [ -d "MB-Portfolio" ]; then
-              echo "Directory exists but is not a Git repository. Removing and cloning..."
-              sudo rm -rf MB-Portfolio
-              git clone https://github.com/cw-prime/MB-Portfolio.git
-            else
-              echo "Directory does not exist, cloning..."
-              git clone https://github.com/cw-prime/MB-Portfolio.git
-            fi
-
-            # Ensure the web server user (www-data) and webadmins group have the appropriate ownership and permissions
-            sudo chown -R alan:webadmins /var/www/MB-Portfolio
-            sudo chmod -R 775 /var/www/MB-Portfolio
-
-            # Safely clear existing files, preserving node_modules
-            find /var/www/MB-Portfolio -mindepth 1 ! -name 'node_modules' -exec rm -rf {} +
-
-            # Copy built files from build directory
-            cp -r $GITHUB_WORKSPACE/build/* /var/www/MB-Portfolio
-
-            # Restart Nginx to apply changes
-            sudo systemctl restart nginx
+            cd /var/www/MB-Portfolio
+            git fetch --all
+            git reset --hard origin/master
+            npm install
+            npm run build
+            # Add any additional commands needed to restart or reload your web server
