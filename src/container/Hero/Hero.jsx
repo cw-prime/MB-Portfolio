@@ -59,6 +59,7 @@ const Hero = (props) => {
         <div className="tag-cmp badge-cmp app__flex">
           <p className="p-text">Web Developer</p>
           <p className="p-text">Freelancer</p>
+          <p className="p-text">Cyber Security Expert</p>
         </div>
       </motion.div>
 
