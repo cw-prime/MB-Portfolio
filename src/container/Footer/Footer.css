@@ -1,6 +1,7 @@
 #contact {
     width: 100%;
     padding: 4em 2rem;
+    overflow-x: hidden; /* Ensure no horizontal scroll */
   }
 
   .app__footer-cards {
@@ -9,7 +10,14 @@
     align-items: center;
     flex-wrap: wrap;
     margin: 4em 2rem 2rem;
+    max-width: 100%; /* Ensure it does not exceed the viewport width */
+    overflow-x: hidden;
 }
+
+* {
+    box-sizing: border-box;
+  }
+
 
   .app__footer-card {
     display: flex;
@@ -109,4 +117,10 @@ footer .footer-copyright {
     margin-top: 2rem; /* Adds space between the copyright notice and the rest of the footer content */
     font-family: 'Times New Roman', Times, serif;
     font-size: smaller;
+  }
+  @media screen and (max-width: 768px) {
+    .footer-send-btn {
+      max-width: 100%; /* Ensures no overflow on small screens */
+      width: 100%;
+    }
   }
